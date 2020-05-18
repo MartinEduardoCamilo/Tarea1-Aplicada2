@@ -1,0 +1,53 @@
+﻿@page "/Calculadora"
+@using Models
+
+<h3>Calculadora</h3>
+
+<EditForm Model="operador">
+    <DataAnnotationsValidator />
+
+    <label for="Id">Primer Número:</label>
+    <div class="input-group">
+        <InputNumber @bind-Value=@operador.PrimerNumero class="form-control"></InputNumber>
+    </div>
+
+    <label for="Id">Segundo Número:</label>
+    <div class="input-group">
+        <InputNumber @bind-Value=@operador.SegundoNumero class="form-control"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-outline-primary" @onclick="Suma">Sumar</button>
+        <button class="btn btn-outline-danger" @onclick="Resta">Restar</button>
+        <button class="btn btn-outline-secondary" @onclick="Multiplicacion">Multiplicar</button>
+    </div>
+
+    <p class="Resultado">
+        @mensaje <InputNumber @bind-Value="operador.resultado" class="form-control" readonly="true" />
+    </p>
+
+</EditForm>
+
+
+@code {
+    Operadores operador = new Operadores();
+    string mensaje = string.Empty;
+
+    private void Suma()
+    {
+        mensaje = "Resultado de la suma es: ";
+        operador.resultado = operador.PrimerNumero + operador.SegundoNumero;
+    }
+
+    private void Resta()
+    {
+        mensaje = "Resultado de la resta es: ";
+        operador.resultado = operador.PrimerNumero - operador.SegundoNumero;
+    }
+
+    private void Multiplicacion()
+    {
+        mensaje = "Resultado de la multiplicación es: ";
+        operador.resultado = operador.PrimerNumero * operador.SegundoNumero;
+    }
+}
